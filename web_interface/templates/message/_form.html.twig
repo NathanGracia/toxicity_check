@@ -1,32 +1,225 @@
+{% block style %}
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+    <style>
+
+        .slider_perso {
+            -webkit-appearance: none;
+            background: transparent;
+            width: 90%;
+            max-width: 500px;
+            outline: none;
+        }
+        .slider_perso:focus,
+        .slider_perso:active,
+        .slider_perso::-moz-focus-inner,
+        .slider_perso::-moz-focus-outer {
+            border: 0;
+            outline: none;
+        }
+
+        .slider_perso::-moz-range-thumb:active {
+            background-position: 100% 0px;
+            transform: rotateZ(var(--thumb-rotate, 10deg));
+        }
+        .slider_perso::-moz-range-track {
+            width: 100%;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            cursor: pointer;
+        }
+        .slider_perso::-moz-range-progress {
+            height: 20px;
+            background: #4685d7;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .slider_perso::-webkit-slider-thumb {
+            background-position: 100% 0px;
+            border: none;
+            height: 50px;
+            width: 50px;
+            background-color: transparent;
+            background-image:url("/img/calm.png");
+            background-size: cover;
+            transform: scale(1.9) rotateZ(var(--thumb-rotate, 10deg));
+            cursor: pointer;
+            margin-top: -15px;
+            -webkit-appearance: none;
+        }
+        .slider_perso::-webkit-slider-thumb:active {
+            background-position: 100% 0px;
+            background-image:url("/img/tilted.png");
+            transform: scale(2) rotateZ(var(--thumb-rotate, 10deg));
+        }
+        .slider_perso::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        .label_perso {
+            width: 200px; /* Spécifiez la largeur souhaitée */
+            height: 200px; /* Spécifiez la hauteur souhaitée */
+            border-radius: 50%; /* Définit la forme ronde */
+            display: flex; /* Utilisez flexbox pour centrer le contenu */
+            justify-content: center; /* Centre horizontalement le contenu */
+            margin: auto;
+            margin-bottom: 30px;
+            align-items: center; /* Centre verticalement le contenu */
+        }
+        .twitter-link {
+            position: absolute;
+            bottom: 4px;
+            margin: auto;
+            font-family: sans-serif;
+            font-size: 12px;
+            color: rgba(0,0,0,0.6);
+        }
+        .background-image-a {
+            background-image: url('/img/ivern.jpg');
+            opacity: 1;
+        }
+
+        .background-image-b {
+            background-image: url('/img/draven.jpeg');
+            opacity: 0;
+        }
+
+        .label_perso {
+            position: relative; /* Ajout de cette ligne */
+        }
+        .toxicity-label{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex; /* Utilisez flexbox pour centrer le contenu */
+            justify-content: center; /* Centre horizontalement le contenu */
+            margin: auto;
+            align-items: center; /* Centre verticalement le contenu */
+            margin-top: 30px;
+            color: white;
+            -webkit-text-stroke: 2px black; /* width and color */
+        }
+        .background-image-a, .background-image-b {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            border-radius: 50%; /* Définit la forme ronde */
+            background-color: #eaeaea; /* Couleur de fond */
+            display: flex; /* Utilisez flexbox pour centrer le contenu */
+            justify-content: center; /* Centre horizontalement le contenu */
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            align-items: center; /* Centre verticalement le contenu */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); /* Ajoute une ombre */
+            font-size: 100px;
+            -webkit-text-stroke: 2px black; /* width and color */
+            font-family: Roboto;
+            color: #dadada;
+        }
+        .perso_button {
+            font-family: 'Marcellus SC', serif;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            background: #1e2328;
+            color: #cdbe91;
+            box-shadow: inset 0 0 2px #000000;
+            border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+            border-image-slice: 1;
+            border-width: 2px;
+        }
+
+        .perso_button:hover {
+            text-shadow: 0 0 5px #ffffff80;
+            box-shadow: 0 0 8px 0 #ffffff50;
+            background: linear-gradient(to bottom, #1e2328, #433d2b);
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .perso_button:active {
+            text-shadow: none;
+            box-shadow: none;
+            color: #cdbe9130;
+        }
+
+    </style>
+{% endblock %}
 <div class="container">
     <div class="row">
-        <div class="col-md-6 ">
+        <div class="col-md-12">
+            <div style="margin: 20px; color: white">
+                <h3 class="h3 mb-0 text-gray-800">Pseudo : <span>{{ message.viewer}}</span></h3>
+                <h3 class="h3 mb-0 text-gray-800">Chaine : <span>{{ message.channel}}</span></h3>
+            </div>
             {{ form_start(form) }}
             <div class="form-group">
-                {{ form_label(form.content, 'Contenu') }}
                 {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
             </div>
-            <div class="form-group">
-                {{ form_label(form.toxicity, 'Toxicité') }}
-                {{ form_widget(form.toxicity, {}) }}
-
-                <div id="toxicityValue">{{ message.toxicity }} 0</div>
+            <div class="form-group text-center" style="margin-bottom: 20px">
+                <div>
+                    {{ form_label(form.toxicity, 'Toxicité', {'attr': {'class': 'label_perso'}}) }}
+                </div>
+                {{ form_widget(form.toxicity, {'attr': {'class': 'slider_perso'}}) }}
+                <div id="toxicityValue" class="label_perso">
+                    <div id="ivern" class="label_perso background-image-a"></div>
+                    <div id="draven" class="label_perso background-image-b"></div>
+                    <div id="toxicityLabel" class="toxicity-label" style="font-size: 60px">0</div> <!-- Nouvel élément pour afficher la valeur -->
+                </div>
+                <button type="submit" class="perso_button" style="margin-top: 20px">{{ button_label|default('Save') }}</button>
             </div>
-
-            <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
             {{ form_end(form) }}
+            <div>aaa</div>
         </div>
     </div>
 </div>
 
-<script>
-    console.log('oui')
-    const toxicitySlider = document.getElementById('message_toxicity');
-    console.log(toxicitySlider)
-    const toxicityValue = document.getElementById('toxicityValue');
 
-    toxicitySlider.addEventListener('input', function() {
-        toxicityValue.innerHTML = toxicitySlider.value;
-    });
+{% block javascript %}<script>
+    // Fonction pour mettre à jour l'opacité des images et la valeur affichée
+    function updateOpacityAndValue() {
+    const toxicitySlider = document.getElementById('message_toxicity');
+    const toxicityValueLabel = document.getElementById('toxicityLabel');
+    const ivernDiv = document.getElementById('ivern');
+    const dravenDiv = document.getElementById('draven');
+
+    const value = Number(toxicitySlider.value);
+    toxicitySlider.style.setProperty('--thumb-rotate', `${value * 720}deg`);
+
+    // Mettre à jour l'opacité des images de fond
+    ivernDiv.style.opacity = 1 - value;
+    dravenDiv.style.opacity = value;
+
+    // Mettre à jour la valeur affichée en direct
+    toxicityValueLabel.innerText = value.toFixed(2);
+}
+
+    // Appeler la fonction lors du chargement de la page
+    document.addEventListener('DOMContentLoaded', function () {
+    updateOpacityAndValue();
+});
+
+    // Écouter l'événement 'input' sur le slider
+    const toxicitySlider = document.getElementById('message_toxicity');
+    toxicitySlider.addEventListener('input', (event) => {
+    updateOpacityAndValue();
+});
 </script>
+
+
+
+{% endblock %}
 

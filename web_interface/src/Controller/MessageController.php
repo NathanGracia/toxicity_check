@@ -57,7 +57,7 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $messageRepository->save($message, true);
 
-            return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_message_edit', ["id" => $message->getId() +1], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('message/edit.html.twig', [
