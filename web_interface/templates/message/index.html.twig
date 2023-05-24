@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message index{% endblock %}
+
+{% block body %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Liste des messages</h1>
+
+    </div>
+
+    <table class="table" id="messages">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>Viewer</th>
+                <th>Channel</th>
+                <th>Viewer_color</th>
+                <th>Created_at</th>
+                <th>Toxicity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.id }}</td>
+                <td>{{ message.content }}</td>
+                <td>{{ message.viewer }}</td>
+                <td>{{ message.channel }}</td>
+                <td>{{ message.viewerColor }}</td>
+                <td>{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ message.toxicity }}</td>
+                <td>
+                    <a href="{{ path('app_message_show', {'id': message.id}) }}">show</a>
+                    <a href="{{ path('app_message_edit', {'id': message.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_message_new') }}">Create new</a>
+{% endblock %}
+{% block javascript %}
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script>
+    let table = new DataTable('#messages', {
+    // options
+});
+</script>
+
+{% endblock %}

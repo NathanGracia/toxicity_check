@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Viewer{% endblock %}
+
+{% block body %}
+    <h1>Create new Viewer</h1>
+
+    {{ include('viewer/_form.html.twig') }}
+
+    <a href="{{ path('app_viewer_index') }}">back to list</a>
+{% endblock %}
