@@ -162,7 +162,7 @@
     <div class="row">
         <div class="col-md-12">
             <div style="margin: 20px; color: white">
-                <h3 class="h3 mb-0 text-gray-800">Pseudo : <span>{{ message.viewer}}</span></h3>
+                <h3 class="h3 mb-0 text-gray-800">Pseudo : <span style="color: {{ message.viewerColor }}">{{ message.viewer}}</span></h3>
                 <h3 class="h3 mb-0 text-gray-800">Chaine : <span>{{ message.channel}}</span></h3>
             </div>
             {{ form_start(form) }}
@@ -170,8 +170,8 @@
                 {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="form-group text-center" style="margin-bottom: 20px">
-                <div>
-                    {{ form_label(form.toxicity, 'Toxicité', {'attr': {'class': 'label_perso'}}) }}
+                <div style="color: white; font-size: 30px">
+                    {{ form_label(form.toxicity, 'Niveau de toxicité :', {'attr': {'class': 'label_perso'}}) }}
                 </div>
                 {{ form_widget(form.toxicity, {'attr': {'class': 'slider_perso'}}) }}
                 <div id="toxicityValue" class="label_perso">
@@ -182,7 +182,6 @@
                 <button type="submit" class="perso_button" style="margin-top: 20px">{{ button_label|default('Save') }}</button>
             </div>
             {{ form_end(form) }}
-            <div style="margin-bottom: 200px">aaa</div>
         </div>
     </div>
 </div>
